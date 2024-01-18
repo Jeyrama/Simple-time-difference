@@ -19,6 +19,8 @@ In the second example, the alarm sounds 4 times in a day.
 */
 
 
+// Solution
+
 function solve(arr){
   let sortedAsMinutes = arr.map(x => timeToMinutes(x)).sort((a, b) => a - b);
   sortedAsMinutes.push(sortedAsMinutes[0] + 60 * 24);

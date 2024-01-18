@@ -37,5 +37,25 @@ function minutesToTime(minutes) {
   return ("" + Math.floor(minutes / 60)).padStart(2, "0") + ":" + ("" + minutes % 60).padStart(2, "0");
 }
 
+// or
+
+const timeDiff = (time, i, arr) => {
+  let a = new Date(`0${arr[i + 1] ? 1 : 2} Jan 2021 ${arr[i + 1] || arr[0]}`);
+  a.setMinutes(a.getMinutes() - time.split(':')[1] - 1);
+  a.setHours(a.getHours() - time.split(':')[0]);
+  return `${`${a.getHours()}`.padStart(2, 0)}:${`${a.getMinutes()}`.padStart(2, 0)}`;
+}
+
+const solve = arr => [...new Set(arr)].sort().map(timeDiff).sort().pop();
 
 // or
+
+const solve = ([...arr]) => {
+  const timeToMin = (str = '24:00') => ([hh, mm] = str.split`:`, hh * 60 + +mm);
+  const minToTime = val => [val / 60, val % 60].map(val => `${~~val}`.padStart(2, '0')).join`:`;
+  
+  arr.sort().push(arr[0].replace(/../, ch => +ch + 24));
+  const maxDiff = arr.reduce((acc, time, idx) => Math.max(acc, timeToMin(time) - timeToMin(arr[idx-1])), 0) - 1;
+  
+  return minToTime(maxDiff);
+}

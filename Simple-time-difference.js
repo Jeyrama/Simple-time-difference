@@ -36,3 +36,6 @@ function timeToMinutes(time) {
 function minutesToTime(minutes) {
   return ("" + Math.floor(minutes / 60)).padStart(2, "0") + ":" + ("" + minutes % 60).padStart(2, "0");
 }
+
+
+// or
